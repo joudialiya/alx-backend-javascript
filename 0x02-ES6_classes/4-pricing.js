@@ -23,9 +23,9 @@ export default class Pricing {
 
   set currency(currency) {
     if (!(currency instanceof Currency)) {
-      throw TypeError('urrency must be a Currency');
+      throw TypeError('Currency must be an instanceof of Currency');
     }
-    this.__currency = currency;
+    this._currency = currency;
   }
 
   displayFullPrice() {
@@ -33,6 +33,12 @@ export default class Pricing {
   }
 
   static convertPrice(amount, conversionRate) {
+    if (typeof amount !== 'number') {
+      throw TypeError('Amount must be a Currency');
+    }
+    if (typeof conversionRate !== 'number') {
+      throw TypeError('Conversion rate must be a Currency');
+    }
     return amount * conversionRate;
   }
 }
