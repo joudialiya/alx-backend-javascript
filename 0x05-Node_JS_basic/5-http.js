@@ -2,12 +2,13 @@ const http = require('http');
 const fs = require('fs');
 
 const PORT = 1245;
-const DB_FILE = process.argv[2] ? process.argv[2] : 'database.csv';
+const DB_FILE = process.argv[2] ? process.argv[2] : '';
 function countStudents(path) {
   return new Promise((resolve, reject) => {
     fs.readFile(path, 'utf8', (err, data) => {
-      if (err) {
+      if (err || !data) {
         reject(new Error('Cannot load the database'));
+        return;
       }
       const majorStudentsMap = {};
       const lines = data.trim().split('\n').slice(1);
@@ -41,7 +42,7 @@ const app = http.createServer((req, res) => {
       break;
     case '/students':
       countStudents(DB_FILE)
-        .then((value) => res.end('This is the list of our students\n' + value))
+        .then((value) => res.end(`This is the list of our students\n${value}`))
         .catch((err) => res.end(err.toString()));
       break;
     default:
