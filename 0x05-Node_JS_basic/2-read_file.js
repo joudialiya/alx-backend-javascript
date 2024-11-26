@@ -4,9 +4,10 @@ function countStudents(path) {
   try {
     const data = fs.readFileSync(path, 'utf8');
     const majorStudentsMap = {};
-    const lines = data.split('\n')
-      .slice(1)
-      .filter((line) => line.length !== 0);
+    const lines = data
+      .trim()
+      .split('\n')
+      .slice(1);
     for (const line of lines) {
       const firstname = line.split(',')[0];
       const major = line.split(',')[3];
