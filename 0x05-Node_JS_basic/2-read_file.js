@@ -19,10 +19,11 @@ function countStudents(path) {
     console.log(`Number of students: ${lines.length}`);
     const majors = Object.getOwnPropertyNames(majorStudentsMap);
     for (const major of majors) {
-      console.log(`Number of students in FIELD: ${majorStudentsMap[major].length}. List: ${majorStudentsMap[major].join(', ')}`);
+      console.log(`Number of students in ${major}: ${majorStudentsMap[major].length}. List: ${majorStudentsMap[major].join(', ')}`);
     }
   } catch (err) {
     console.error('Cannot load the database');
   }
 }
+// countStudents("database.csv")
 module.exports = countStudents;
