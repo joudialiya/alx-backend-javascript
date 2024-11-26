@@ -22,8 +22,8 @@ function countStudents(path) {
       for (const major of majors) {
         console.log(`Number of students in ${major}: ${majorStudentsMap[major].length}. List: ${majorStudentsMap[major].join(', ')}`);
       }
+      resolve(true);
     });
-    resolve(true);
   });
 }
 module.exports = countStudents;
