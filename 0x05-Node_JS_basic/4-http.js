@@ -1,8 +1,14 @@
 const http = require('http');
 
 const PORT = 1245;
-const server = http.createServer((req, res) => {
-  res.writeHead(200, { 'Content-Type': 'text/plain' });
-  res.end('Hello Holberton School!');
+const app = http.createServer((_, res) => {
+  const text = 'Hello Holberton School!';
+  res.writeHead(200, {
+    'Content-Type': 'text/plain',
+    'Content-Length': text.length,
+  });
+  res.end(text);
 });
-server.listen(PORT);
+app.listen(PORT);
+
+module.exports = app;
