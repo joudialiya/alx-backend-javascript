@@ -41,7 +41,7 @@ const app = http.createServer((req, res) => {
       break;
     case '/students':
       countStudents(DB_FILE)
-        .then((value) => res.end(value))
+        .then((value) => res.end('This is the list of our students\n' + value))
         .catch((err) => res.end(err.toString()));
       break;
     default:
