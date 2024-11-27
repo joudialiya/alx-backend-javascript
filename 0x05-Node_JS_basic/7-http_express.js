@@ -36,7 +36,7 @@ app.get('/', (_, res) => res.end('Hello Holberton School!'));
 app.get('/students', (_, res) => {
   countStudents(DB_FILE)
     .then((value) => res.end(`This is the list of our students\n${value}`))
-    .catch((err) => res.end(`This is the list of our students\n${err.toString()}`));
+    .catch((err) => res.end(`This is the list of our students\n${err.message}`));
 });
 app.listen(PORT);
 module.exports = app;
