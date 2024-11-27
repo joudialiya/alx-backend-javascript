@@ -8,13 +8,11 @@ class StudentsController {
     readDatabase(path)
       .then((data) => {
         const chunks = ['This is the list of our students'];
-        let numberOfStudent = 0;
-        const fields = Object.getOwnPropertyNames(data);
+        const fields = Object.getOwnPropertyNames(data).sort();
+
         for (const field of fields) {
           chunks.push(`Number of students in ${field}: ${data[field].length}. List: ${data[field].join(', ')}`);
-          numberOfStudent += data[field].length;
         }
-        chunks.splice(1, 0, `Number of students: ${numberOfStudent}`);
         response
           .status(200)
           .end(chunks.join('\n'));
@@ -39,12 +37,12 @@ class StudentsController {
         if (Object.keys(data).includes(major)) {
           text = `List: ${data[major].join(', ')}`;
         }
-        response.status(200).send(text);
+        response.status(200).end(text);
       })
       .catch((err) => {
         response
           .status(500)
-          .send(err instanceof Error ? err.message : err.toString());
+          .end(err instanceof Error ? err.message : err.toString());
       });
   }
 }
