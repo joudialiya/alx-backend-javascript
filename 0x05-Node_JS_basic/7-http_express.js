@@ -1,5 +1,5 @@
 const express = require('express');
-const fs = require('express');
+const fs = require('fs');
 
 const DB_FILE = process.argv[2] ? process.argv[2] : '';
 function countStudents(path) {
@@ -11,7 +11,7 @@ function countStudents(path) {
       }
       const majorStudentsMap = {};
       const lines = data.trim().split('\n').slice(1);
-      let res = '';
+      const chunks = [];
       for (const line of lines) {
         const firstname = line.split(',')[0];
         const major = line.split(',')[3];
@@ -21,12 +21,12 @@ function countStudents(path) {
           majorStudentsMap[major] = [firstname];
         }
       }
-      res += `Number of students: ${lines.length}\n`;
+      chunks.push(`Number of students: ${lines.length}`);
       const majors = Object.getOwnPropertyNames(majorStudentsMap);
       for (const major of majors) {
-        res += `Number of students in ${major}: ${majorStudentsMap[major].length}. List: ${majorStudentsMap[major].join(', ')}\n`;
+        chunks.push(`Number of students in ${major}: ${majorStudentsMap[major].length}. List: ${majorStudentsMap[major].join(', ')}`);
       }
-      resolve(res);
+      resolve(chunks.join('\n'));
     });
   });
 }
