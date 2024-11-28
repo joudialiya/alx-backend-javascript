@@ -9,6 +9,6 @@ describe('calculateNumberr', () => {
     assert.equal(calculateNumber(1, 3.7), 5);
   });
   it('3' , () => {
-    assert.equal(calculateNumber(1.2, 3.7),5);
+    assert.equal(calculateNumber(1.2, 3.7), 5);
   });
 });
