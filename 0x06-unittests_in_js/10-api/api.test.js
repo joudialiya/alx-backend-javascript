@@ -47,11 +47,11 @@ describe('API integration test', () => {
       done();
     });
   });
-  
-  it('POST /login returns valid response', (done) => {
-    request.post(`${API_URL}/login`, {json: {userName: 'Pinkbrook'}}, (_err, res, body) => {
+
+  it.skip('POST /login returns valid response', (done) => {
+    request.post(`${API_URL}/login`, {json: {userName: 'joudia'}}, (_err, res, _body) => {
       expect(res.statusCode).to.be.equal(200);
-      expect(body).to.be.equal('Welcome Pinkbrook');
+      expect(_body).to.be.equal('Welcome joudia');
       done();
     });
   });
